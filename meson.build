@@ -14,7 +14,7 @@ project(
 add_project_arguments(
 	[
 		'-DWLR_USE_UNSTABLE',
-
+'-O',
 		'-Wno-unused-parameter',
 		'-Wno-unused-result',
 		'-Wno-missing-braces',
@@ -35,8 +35,14 @@ if is_freebsd
 	add_project_arguments('-D_C11_SOURCE', language: 'c')
 endif
 
+# Execute the scenefx subproject, if any
+subproject(
+	'scenefx',
+	required: false,
+)
+
 # Execute the wlroots subproject, if any
-wlroots_version = ['>=0.16.0', '<0.17.0']
+wlroots_version = ['>=0.17.0', '<0.18.0']
 subproject(
 	'wlroots',
 	default_options: ['examples=false'],
